@@ -11,4 +11,8 @@ https://github.com/uniplaces/stest/blob/master/src/Uniplaces/STest/ListingFinder
 Don't change tests, the only exception is the construction of objects if you desire (but without breaking the tests):
 https://github.com/uniplaces/stest/blob/master/tests/Uniplaces/STest/Tests/FindListingsTest.php#L171
 
-If you can try to make possible to add new specifications to the Finder without directly touch Finder code. Also any hard coded value in ListingFinder should be able easily configured.
+Some tips, after refactor the following should be present:
+* ListingFinder should be easy to read in under 15 seconds and understand what it do;
+* The size of ListingFinder should be minimum (is just a class to "query");
+* Add new "rules" should be easy and shouldn't require to touch ListingFinder code direclty;
+* Hard coded values on ListingFinder shouldn't be hard coded and should be easy to configure;
