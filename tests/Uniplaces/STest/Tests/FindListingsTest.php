@@ -8,7 +8,7 @@ use Uniplaces\STest\Localization\Localization;
 use Uniplaces\STest\Requirement\Requirements;
 use Uniplaces\STest\Requirement\StayTime;
 use Uniplaces\STest\Requirement\TenantTypes;
-use Uniplaces\STest\ListingFinder;
+use Uniplaces\STest\ListingFinderFactory;
 use DateTime;
 
 class FindListingsTest extends PHPUnit_Framework_TestCase
@@ -47,7 +47,7 @@ class FindListingsTest extends PHPUnit_Framework_TestCase
 
     public function testAddress()
     {
-        $listings = $this->search(
+        $listings = $this->searchAdvanced(
             array(
                 'city' => 'Lisbon',
                 'address' => 'Avenida Liberade',
@@ -64,7 +64,7 @@ class FindListingsTest extends PHPUnit_Framework_TestCase
     public function testPrice()
     {
         // test min
-        $listings = $this->search(
+        $listings = $this->searchAdvanced(
             array(
                 'city' => 'Lisbon',
                 'price' => array('min' => 1000),
@@ -78,7 +78,7 @@ class FindListingsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(3000, $listing->getPrice());
 
         // test max
-        $listings = $this->search(
+        $listings = $this->searchAdvanced(
             array(
                 'city' => 'Lisbon',
                 'price' => array('max' => 1000),
@@ -92,7 +92,7 @@ class FindListingsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(900, $listing->getPrice());
 
         // test range
-        $listings = $this->search(
+        $listings = $this->searchAdvanced(
             array(
                 'city' => 'Lisbon',
                 'price' => array('min' => 200, 'max' => 800),
@@ -103,7 +103,7 @@ class FindListingsTest extends PHPUnit_Framework_TestCase
         $this->assertCount(0, $listings);
 
         // test exactly
-        $listings = $this->search(
+        $listings = $this->searchAdvanced(
             array(
                 'city' => 'Lisbon',
                 'price' => array('min' => 900, 'max' => 900),
@@ -160,9 +160,24 @@ class FindListingsTest extends PHPUnit_Framework_TestCase
         $this->assertNull($listing->getRequirements()->getTenantTypes());
     }
 
+    /**
+     * @param array $search
+     *
+     * @return Listing[]
+     */
     protected function search(array $search)
     {
-        return (new ListingFinder())->reduce($this->getListings(), $search);
+        return ListingFinderFactory::createSimple()->reduce($this->getListings(), $search);
+    }
+
+    /**
+     * @param array $search
+     *
+     * @return Listing[]
+     */
+    protected function searchAdvanced(array $search)
+    {
+        return ListingFinderFactory::createAdvanced()->reduce($this->getListings(), $search);
     }
 
     /**
