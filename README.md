@@ -1,4 +1,0 @@
-stest
-=====
-
-Simple practical test
