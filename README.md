@@ -10,3 +10,5 @@ https://github.com/uniplaces/stest/blob/master/src/Uniplaces/STest/ListingFinder
 
 Don't change tests, the only exception is the construction of objects if you desire (but without breaking the tests):
 https://github.com/uniplaces/stest/blob/master/tests/Uniplaces/STest/Tests/FindListingsTest.php#L171
+
+If you can try to make possible to add new specifications to the Finder without directly touch Finder code. Also any hard coded value in ListingFinder should be able easily configured.
