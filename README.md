@@ -1,0 +1,4 @@
+stest
+=====
+
+Simple practical test
