@@ -1,5 +1,4 @@
-Simple test
-=====
+# Simple test
 
 Simple practical test.
 
@@ -17,3 +16,12 @@ After refactor is expected:
 * Add new "rules" should be easy and shouldn't require to touch ListingFinder code directly;
 * Hard coded values on ListingFinder shouldn't be hard coded and should be easy to configure;
 * Should be easy to add new type of search eg: 'extra-advanced' without touching the ListingFinder code
+
+## Setup
+
+* Fork
+* git clone ...
+* cd stest
+* curl -sS https://getcomposer.org/installer | php
+* php composer.phar install --dev
+* Run tests: ./vendor/bin/phpunit
