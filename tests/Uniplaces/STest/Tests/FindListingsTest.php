@@ -13,6 +13,20 @@ use DateTime;
 
 class FindListingsTest extends PHPUnit_Framework_TestCase
 {
+    public function testSimpleSearchIgnoresPrice()
+    {
+        $listings = $this->search(
+            array(
+                'city' => 'Lisbon',
+                'price' => array('min' => 1000),
+                'occupation' => TenantTypes::UNDERGRADUATE
+            )
+        );
+
+        // the price was ignored so expecting 2
+        $this->assertCount(2, $listings);
+    }
+
     /**
      * @param string $city
      * @param int    $nrExpectRes
