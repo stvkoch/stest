@@ -3,7 +3,6 @@ namespace Uniplaces\STest\Filter\Token;
 
 class AndOperator extends Operator implements TokenConditionInterface
 {
-    protected $operator = null;
 
     public function match($doc = null)
     {
